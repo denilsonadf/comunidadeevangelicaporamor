@@ -1,132 +1,84 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academia das Águias - Por Amor</title>
-    <style>
-        body {
-            background-color: #f4f9ff;
-            font-family: Arial, sans-serif;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #0057b8;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        main {
-            max-width: 800px;
-            margin: 30px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #ccc;
-        }
-        h1, h2 {
-            color: #0057b8;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #0057b8;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #003d80;
-        }
-        .content {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academia das Águias - Por Amor</title>
+  <style>
+    body { font-family: Arial; background: #f0f4ff; margin: 0; padding: 0; }
+    header { background: #003366; color: white; padding: 20px; text-align: center; }
+    .container { padding: 20px; max-width: 900px; margin: auto; }
+    h1, h2 { color: #003366; }
+    input[type="text"] { width: 100%; padding: 8px; margin-bottom: 10px; }
+    button { padding: 10px 20px; background: #003366; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0055aa; }
+    .hidden { display: none; }
+    footer { background: #003366; color: white; padding: 10px; text-align: center; margin-top: 40px; }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>Academia das Águias - Por Amor</h1>
+  <h1>Academia das Águias</h1>
+  <p>Igreja Por Amor</p>
 </header>
 
-<main>
-    <h2>Estudo - Liderar é Influenciar</h2>
-    <div class="content">
-        <p><strong>Reflexão:</strong></p>
-        <p>Como está sua influência com:</p>
-        <ul>
-            <li>As pessoas acima de você?</li>
-            <li>As pessoas na mesma posição?</li>
-            <li>As pessoas sob sua liderança?</li>
-        </ul>
-        <p>Preencha abaixo suas respostas e confirme sua conclusão.</p>
-    </div>
+<div class="container">
+  <h2>Módulo 1 - Liderar é Influenciar</h2>
+  <p><strong>Pergunta 1:</strong> O que é liderança segundo o curso?</p>
+  <input type="text" id="q1">
 
-    <form id="form">
-        <label>Nome Completo:
-            <input type="text" id="nome" required>
-        </label>
-        <label>Telefone com DDD:
-            <input type="text" id="telefone" placeholder="Ex: 61999999999" required>
-        </label>
+  <p><strong>Pergunta 2:</strong> Cite uma atitude de um líder de sucesso:</p>
+  <input type="text" id="q2">
 
-        <label>Como está sua influência com quem está acima de você?
-            <textarea id="acima" rows="3" required></textarea>
-        </label>
-        <label>Com quem está na mesma posição?
-            <textarea id="mesmo" rows="3" required></textarea>
-        </label>
-        <label>Com quem está abaixo de você?
-            <textarea id="abaixo" rows="3" required></textarea>
-        </label>
+  <button onclick="finalizarExercicio()">Finalizar Exercício</button>
 
-        <button type="button" onclick="enviarWhatsapp()">Concluir e Enviar no WhatsApp</button>
-    </form>
-</main>
+  <div id="formulario" class="hidden">
+    <h2>Formulário de Conclusão</h2>
+    <p>Preencha seus dados para confirmar sua conclusão:</p>
+    <input type="text" id="nome" placeholder="Seu nome">
+    <input type="text" id="telefone" placeholder="Seu telefone com DDD">
+    <input type="text" id="instagram" placeholder="Seu Instagram">
+
+    <button onclick="enviarWhatsapp()">Enviar Confirmação</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Igreja Por Amor - Academia das Águias</p>
+</footer>
 
 <script>
-    function enviarWhatsapp() {
-        const nome = document.getElementById('nome').value.trim();
-        const telefone = document.getElementById('telefone').value.trim();
-        const acima = document.getElementById('acima').value.trim();
-        const mesmo = document.getElementById('mesmo').value.trim();
-        const abaixo = document.getElementById('abaixo').value.trim();
+function finalizarExercicio() {
+  const r1 = document.getElementById('q1').value.trim();
+  const r2 = document.getElementById('q2').value.trim();
 
-        if (!nome || !telefone || !acima || !mesmo || !abaixo) {
-            alert('Por favor, preencha todos os campos.');
-            return;
-        }
+  if (r1 === "" || r2 === "") {
+    alert("Por favor, responda todas as perguntas.");
+    return;
+  }
 
-        const numeroEnvio = '5561986298041'; // Número que irá receber no WhatsApp
-        const mensagem = `✅ *Confirmação de Conclusão - Academia das Águias* ✅
+  alert("Parabéns! Você concluiu o exercício. Agora preencha seus dados.");
+  document.getElementById('formulario').classList.remove('hidden');
+}
 
-👤 *Nome:* ${nome}
-📱 *Telefone:* ${telefone}
+function enviarWhatsapp() {
+  const nome = document.getElementById('nome').value.trim();
+  const telefone = document.getElementById('telefone').value.trim();
+  const instagram = document.getElementById('instagram').value.trim();
 
-📝 *Avaliação de Influência:*
-- Acima: ${acima}
-- Mesmo nível: ${mesmo}
-- Abaixo: ${abaixo}
+  if (nome === "" || telefone === "" || instagram === "") {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
 
-🔔 *Deus te abençoe!*`;
+  const mensagem = `✅ *Conclusão do módulo - Academia das Águias*\n\n👤 Nome: ${nome}\n📱 Telefone: ${telefone}\n📸 Instagram: ${instagram}\n\nConcluiu o módulo com sucesso!`;
 
-        const url = `https://wa.me/${numeroEnvio}?text=${encodeURIComponent(mensagem)}`;
-        window.open(url, '_blank');
-    }
+  const numero = '5561986298041'; // Número da igreja (com DDI)
+  const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+  window.open(link, '_blank');
+}
 </script>
 
 </body>
